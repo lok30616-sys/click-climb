@@ -6,6 +6,9 @@ const COOLDOWN_MS = COOLDOWN_HOURS * 60 * 60 * 1000;
 const MAX_LEVEL = 200;
 const STREAK_BONUS_DAYS = 5;
 
+// Detect if running on GitHub Pages (production)
+const IS_PRODUCTION = window.location.hostname.includes('github.io');
+
 // ==================== THEME CONFIG ====================
 const THEMES = {
     plain: {
@@ -171,6 +174,12 @@ function init() {
     renderAchievements();
     renderHistory();
     checkDayStreak();
+    
+    // Hide dev tools in production (GitHub Pages)
+    if (IS_PRODUCTION) {
+        const devButton = document.querySelector('button[onclick="toggleDevTools()"]');
+        if (devButton) devButton.style.display = 'none';
+    }
 }
 
 // ==================== THEME FUNCTIONS ====================
