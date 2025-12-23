@@ -1,0 +1,185 @@
+/* Click Climb - Theme Styles */
+
+/* ==================== THEME 1: PLAIN (Default) ==================== */
+[data-theme="plain"] {
+    --primary: #4F46E5;
+    --primary-dark: #3730A3;
+    --primary-light: #6366F1;
+    --accent: #4F46E5;
+    --accent-dark: #3730A3;
+    --bg-dark: #F9FAFB;
+    --bg-panel: #FFFFFF;
+    --bg-panel-light: #FFFFFF;
+    --text: #111827;
+    --text-light: #6B7280;
+    --text-accent: #4F46E5;
+    --border: #E5E7EB;
+    --border-accent: #4F46E5;
+    --success: #10B981;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --glow-color: rgba(79, 70, 229, 0.3);
+    --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --progress-gradient: linear-gradient(to top, var(--primary), var(--success));
+    --button-gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+/* ==================== THEME 2: NINJA ==================== */
+[data-theme="ninja"] {
+    --primary: #8B0000;
+    --primary-dark: #5C0000;
+    --primary-light: #B22222;
+    --accent: #D4AF37;
+    --accent-dark: #AA8C2C;
+    --bg-dark: #0D0D0D;
+    --bg-panel: #1A1A1A;
+    --bg-panel-light: #252525;
+    --text: #E8E8E8;
+    --text-light: #888888;
+    --text-accent: #D4AF37;
+    --border: #333333;
+    --border-accent: #8B7355;
+    --success: #228B22;
+    --danger: #8B0000;
+    --warning: #D4AF37;
+    --glow-color: rgba(139, 0, 0, 0.5);
+    --font-main: 'Cinzel', 'Times New Roman', serif;
+    --progress-gradient: linear-gradient(to top, var(--primary-dark), var(--primary), var(--accent));
+    --button-gradient: radial-gradient(circle at 30% 30%, var(--primary-light), var(--primary-dark));
+}
+
+/* ==================== THEME 3: HIKING ==================== */
+[data-theme="hiking"] {
+    --primary: #2D5A27;
+    --primary-dark: #1E3D1A;
+    --primary-light: #4A7C43;
+    --accent: #8B4513;
+    --accent-dark: #6B3410;
+    --bg-dark: #F5F0E6;
+    --bg-panel: #FFFEF9;
+    --bg-panel-light: #FFFEF9;
+    --text: #2C1810;
+    --text-light: #6B5344;
+    --text-accent: #2D5A27;
+    --border: #D4C4A8;
+    --border-accent: #8B4513;
+    --success: #2D5A27;
+    --danger: #8B2500;
+    --warning: #DAA520;
+    --glow-color: rgba(45, 90, 39, 0.3);
+    --font-main: 'Georgia', 'Times New Roman', serif;
+    --progress-gradient: linear-gradient(to top, var(--accent), var(--primary), #87CEEB);
+    --button-gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+/* ==================== THEME 4: GAMBLE ==================== */
+[data-theme="gamble"] {
+    --primary: #1a1a2e;
+    --primary-dark: #0f0f1a;
+    --primary-light: #2a2a4e;
+    --accent: #FFD700;
+    --accent-dark: #B8860B;
+    --bg-dark: #0a0a14;
+    --bg-panel: #16162a;
+    --bg-panel-light: #1e1e3a;
+    --text: #FFFFFF;
+    --text-light: #9090A0;
+    --text-accent: #FFD700;
+    --border: #2a2a4a;
+    --border-accent: #FFD700;
+    --success: #00FF00;
+    --danger: #FF0040;
+    --warning: #FFD700;
+    --glow-color: rgba(255, 215, 0, 0.4);
+    --font-main: 'Arial Black', 'Helvetica', sans-serif;
+    --progress-gradient: linear-gradient(to top, var(--danger), var(--accent), var(--success));
+    --button-gradient: linear-gradient(135deg, #FFD700, #B8860B);
+}
+
+/* ==================== THEME-SPECIFIC OVERRIDES ==================== */
+
+/* Plain theme - lighter shadows */
+[data-theme="plain"] .level-display,
+[data-theme="plain"] .stats-row,
+[data-theme="plain"] .achievements-panel,
+[data-theme="plain"] .history-panel,
+[data-theme="plain"] .info-panel {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-top: none;
+}
+
+[data-theme="plain"] .level-display::before,
+[data-theme="plain"] header::after {
+    display: none;
+}
+
+[data-theme="plain"] header {
+    border-bottom: none;
+}
+
+[data-theme="plain"] .climb-button {
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+}
+
+[data-theme="plain"] .climb-button:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+}
+
+/* Hiking theme - nature feel */
+[data-theme="hiking"] header::after {
+    content: '🌲';
+}
+
+[data-theme="hiking"] .level-display::before {
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+[data-theme="hiking"] .climb-button {
+    box-shadow: 0 4px 15px rgba(45, 90, 39, 0.4);
+}
+
+/* Gamble theme - casino feel */
+[data-theme="gamble"] header::after {
+    content: '♠️';
+}
+
+[data-theme="gamble"] .level-display {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), inset 0 0 30px rgba(0,0,0,0.5);
+}
+
+[data-theme="gamble"] .climb-button {
+    color: #0a0a14;
+    font-weight: 900;
+    text-shadow: none;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5), inset 0 2px 10px rgba(255,255,255,0.3);
+}
+
+[data-theme="gamble"] .climb-button:hover:not(:disabled) {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), inset 0 2px 10px rgba(255,255,255,0.3);
+}
+
+[data-theme="gamble"] .progress-fill {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+[data-theme="gamble"] .level-number {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+[data-theme="gamble"] .modal-content {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+}
+
+[data-theme="gamble"] .bonus-button {
+    background: linear-gradient(180deg, #FF0040, #AA0030);
+    border-color: #FF0040;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Ninja theme specific */
+[data-theme="ninja"] header::after {
+    content: '⚔';
+}

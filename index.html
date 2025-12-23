@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ninja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Climb</title>
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1 id="gameTitle">Click Climb</h1>
+            <p class="tagline" id="gameTagline">One strike per day. Ascend to mastery.</p>
+        </header>
+
+        <!-- Theme Selector -->
+        <div class="theme-selector">
+            <button class="theme-btn" data-theme="plain" onclick="setTheme('plain')">Plain</button>
+            <button class="theme-btn active" data-theme="ninja" onclick="setTheme('ninja')">Ninja</button>
+            <button class="theme-btn" data-theme="hiking" onclick="setTheme('hiking')">Hiking</button>
+            <button class="theme-btn" data-theme="gamble" onclick="setTheme('gamble')">Gamble</button>
+        </div>
+
+        <!-- Main Game Area -->
+        <main>
+            <!-- Level Display -->
+            <div class="level-display">
+                <div class="level-info">
+                    <span class="level-label" id="levelLabel">Rank</span>
+                    <span class="level-number" id="currentLevel">1</span>
+                    <span class="progress-text" id="progressText">1 / 200</span>
+                </div>
+                <div class="progress-container">
+                    <span class="progress-top" id="progressTop">⛩️</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-bottom" id="progressBottom">🥷</span>
+                </div>
+            </div>
+
+            <!-- Click Button -->
+            <div class="button-area">
+                <button class="climb-button" id="climbButton" onclick="handleClick()">
+                    <span class="button-text" id="buttonText">STRIKE</span>
+                </button>
+                <div class="cooldown-display" id="cooldownDisplay">
+                    <span id="cooldownText">Ready to strike!</span>
+                </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="stat-value" id="streakDays">0</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="bonusClicks">0</span>
+                    <span class="stat-label">Bonus Clicks</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="totalClicks">0</span>
+                    <span class="stat-label">Total Clicks</span>
+                </div>
+            </div>
+
+            <!-- Bonus Click Button -->
+            <button class="bonus-button" id="bonusButton" onclick="useBonusClick()" style="display: none;">
+                Use Bonus Click
+            </button>
+
+            <!-- Last Result -->
+            <div class="result-display" id="resultDisplay"></div>
+        </main>
+
+        <!-- Achievements Button -->
+        <button class="achievements-toggle" onclick="toggleAchievements()">
+            <span id="achieveIcon">⚔️</span> Achievements <span id="achievementCount">(0/15)</span>
+        </button>
+
+        <!-- Achievements Panel -->
+        <div class="achievements-panel" id="achievementsPanel">
+            <h2>Achievements</h2>
+            <div class="achievements-grid" id="achievementsGrid"></div>
+        </div>
+
+        <!-- History Toggle -->
+        <button class="history-toggle" onclick="toggleHistory()">
+            📜 <span id="historyLabel">Battle History</span>
+        </button>
+
+        <!-- History Panel -->
+        <div class="history-panel" id="historyPanel">
+            <h2 id="historyTitle">Recent Attempts</h2>
+            <div class="history-list" id="historyList"></div>
+        </div>
+
+        <!-- How to Play Button -->
+        <button class="info-toggle" onclick="toggleHowToPlay()">
+            ❓ How to Play
+        </button>
+
+        <!-- How to Play Panel -->
+        <div class="info-panel" id="howToPlayPanel">
+            <h2>How to Play</h2>
+            <div class="info-content">
+                <div class="info-section">
+                    <h3>🎯 Goal</h3>
+                    <p id="goalText">Ascend from Rank 1 to Rank 200!</p>
+                </div>
+                <div class="info-section">
+                    <h3>🖱️ Daily Action</h3>
+                    <p id="actionText">Click the button once every 23 hours. Each attempt has a random chance of success based on your level.</p>
+                </div>
+                <div class="info-section">
+                    <h3>📊 Probability</h3>
+                    <ul>
+                        <li><strong>Level 1-100:</strong> Gets harder (100% → 50% average)</li>
+                        <li><strong>Level 101-199:</strong> Even harder (50% → 1%)</li>
+                    </ul>
+                    <p style="margin-top: 5px;" id="winText">Success at Level 199 = You win! 🎉</p>
+                </div>
+                <div class="info-section">
+                    <h3>✅ Success / ❌ Fail</h3>
+                    <p>Success = advance one level. Fail = stay at same level (try again tomorrow).</p>
+                </div>
+                <div class="info-section">
+                    <h3>🔥 Streak Bonus</h3>
+                    <p>Play 5 consecutive days to earn a bonus click! Bonus clicks stack and can be used anytime.</p>
+                </div>
+                <div class="info-section">
+                    <h3>🏆 Achievements</h3>
+                    <p>Unlock 15 achievements for reaching milestones, streaks, and special moments!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Button -->
+        <button class="info-toggle" onclick="toggleAbout()">
+            ℹ️ About
+        </button>
+
+        <!-- About Panel -->
+        <div class="info-panel" id="aboutPanel">
+            <h2>About Click Climb</h2>
+            <div class="info-content">
+                <p><strong>Click Climb</strong> is a simple daily game that tests your patience and luck.</p>
+                <p style="margin-top: 10px;">The journey to Level 200 takes dedication - there are no shortcuts, just one click per day.</p>
+                <div class="info-section" style="margin-top: 15px;">
+                    <h3>� DVersion</h3>
+                    <p>v1.1.0</p>
+                </div>
+                <div class="info-section">
+                    <h3>🎨 Themes</h3>
+                    <p>Choose your style: Plain, Ninja, Hiking, or Gamble!</p>
+                </div>
+                <div class="info-section">
+                    <h3>💾 Data</h3>
+                    <p>Progress is saved in your browser. Clearing browser data will reset your game.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <button class="reset-button" onclick="confirmReset()">Reset Progress</button>
+            <button class="reset-button" onclick="toggleDevTools()" style="margin-left: 10px;">🔧 Dev Tools</button>
+        </footer>
+
+        <!-- Developer Tools Panel -->
+        <div class="dev-panel" id="devPanel">
+            <h2>🔧 Developer Tools</h2>
+            <p class="dev-warning">⚠️ For testing only. Using these will affect your game!</p>
+            
+            <div class="dev-section">
+                <h3>Timer Controls</h3>
+                <button class="dev-button" onclick="devClearTimer()">Clear Cooldown Timer</button>
+            </div>
+            
+            <div class="dev-section">
+                <h3>Level Controls</h3>
+                <div class="dev-input-group">
+                    <input type="number" id="devLevelInput" min="1" max="200" value="1" placeholder="Level (1-200)">
+                    <button class="dev-button" onclick="devSetLevel()">Set Level</button>
+                </div>
+                <div class="dev-quick-levels">
+                    <button onclick="devSetLevelQuick(1)">Lvl 1</button>
+                    <button onclick="devSetLevelQuick(50)">Lvl 50</button>
+                    <button onclick="devSetLevelQuick(100)">Lvl 100</button>
+                    <button onclick="devSetLevelQuick(150)">Lvl 150</button>
+                    <button onclick="devSetLevelQuick(199)">Lvl 199</button>
+                    <button onclick="devSetLevelQuick(200)">Lvl 200</button>
+                </div>
+            </div>
+            
+            <div class="dev-section">
+                <h3>Bonus Clicks</h3>
+                <div class="dev-input-group">
+                    <input type="number" id="devBonusInput" min="0" max="99" value="1" placeholder="Bonus clicks">
+                    <button class="dev-button" onclick="devAddBonus()">Add Bonus Clicks</button>
+                </div>
+            </div>
+            
+            <div class="dev-section">
+                <h3>Streak Controls</h3>
+                <div class="dev-input-group">
+                    <input type="number" id="devStreakInput" min="0" max="999" value="5" placeholder="Streak days">
+                    <button class="dev-button" onclick="devSetStreak()">Set Streak</button>
+                </div>
+            </div>
+            
+            <div class="dev-section">
+                <h3>Achievements</h3>
+                <button class="dev-button" onclick="devUnlockAllAchievements()">Unlock All Achievements</button>
+                <button class="dev-button" onclick="devClearAchievements()">Clear All Achievements</button>
+            </div>
+            
+            <div class="dev-section">
+                <h3>Debug Info</h3>
+                <button class="dev-button" onclick="devShowState()">Show Game State (Console)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="modal" id="resultModal">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 id="modalTitle"></h2>
+            <p id="modalMessage"></p>
+            <div class="modal-stats" id="modalStats"></div>
+            <button class="modal-close" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Achievement Unlocked Toast -->
+    <div class="achievement-toast" id="achievementToast">
+        <span class="toast-icon">🏆</span>
+        <span class="toast-text" id="toastText">Achievement Unlocked!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
