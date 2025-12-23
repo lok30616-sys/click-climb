@@ -27,7 +27,7 @@ Choose your style:
 
 ## 🚀 Play Now
 
-Visit: [Your GitHub Pages URL]
+Visit: https://lok30616-sys.github.io/click-climb/
 
 ## 💾 Local Development
 
